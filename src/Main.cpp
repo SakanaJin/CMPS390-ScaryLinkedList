@@ -157,6 +157,7 @@ public:
                 curr = NULL; //these two lines makes the smart pointer delete the object it 'owns'
                 curr.reset();//
                 indexLengths[first - 'a']--;
+                length--;
                 return;
             }
             else{
@@ -212,69 +213,62 @@ public:
 };
 
 int main(){
-    /*
+    ScaryLinkedList list = ScaryLinkedList();
+    std::cout << "Enter in the entire filepath to a list of names\n>>> ";
     std::string filepath;
     std::getline(std::cin, filepath);
-    std::fstream file;
+    std::ifstream file;
     file.open(filepath.c_str());
-    std::cout << file.is_open();
+    if(file.is_open() == 0){
+         std::cout << "Invalid filepath";
+         return 1;
+    }
     std::string name;
     while(file >> name){
-        std::cout << name << "\n";
+         list.insert(name.c_str());
     }
     file.close();
-    */
-   /*
-   ScaryLinkedList list = ScaryLinkedList();
-   list.insert("nancy");
-   list.insert("Shabong");
-   list.insert("abby"); //breaks jerry joe case
-   list.insert("albert"); //breaks jerry joe case
-   list.insert("bobby"); //breaks jerry joe case
-   list.insert("zzz");
-   list.insert("george");
-   list.insert("pablo");
-   list.insert("keith");
-   //list.insert("mark");
-   list.insert("denmark");
-   list.insert("joe");
-   //list.insert("bob");
-   list.insert("harry");
-   list.insert("mary");
-   list.insert("brian");
-   list.insert("tom");
-   list.insert("jerry");
-   list.insert("bullwinkle");
-   list.insert("pam");
-   list.showList();
-   //list.remove("albert");
-   //list.showList();
-   //list.make();
-   //list.indexer();
-   //std::cout << list.Length('a');
-   //list.showList('a');
-    */
-   
-   ScaryLinkedList list = ScaryLinkedList();
-   std::string filepath;
-   std::getline(std::cin, filepath);
-   std::ifstream file;
-   file.open(filepath.c_str());
-   if(file.is_open() == 0){
-        std::cout << "Invalid filepath";
-        return 1;
-   }
-   std::string name;
-   while(file >> name){
-        list.insert(name.c_str());
-   }
-   file.close();
-   list.showList();
-   list.remove("zack");
-   std::cout << '\n';
-   //list.indexes();
-   //list.showList('v');
-   list.showList('z');
+    std::cout << "\n0: Quit\n1: Show List\n2: Index Names\n3: Show Index\n4: List Length\n5: Index Length\n6: Insert Name\n7: Remove Name";
+    bool running = true;
+    int x;
+    char c;
+    std::string in = "";
+    while(running){
+        std::cout << "\n>>> ";
+        std::cin >> x;
+        switch(x){
+            case 0: running = false;
+                    break;
+            case 1: list.showList();
+                    //std::cout << '\n';
+                    break;
+            case 2: list.indexes();
+                    break;
+            case 3: std::cout << "\nWhich index: ";
+                    std::cin >> c;
+                    list.showList(c);
+                    break;
+            case 4: std::cout << '\n' << list.Length();
+                    break;
+            case 5: std::cout << "\nWhich index: ";
+                    std::cin >> c;
+                    std::cout << '\n' << list.Length(c);
+                    break;
+            case 6: std::cout << "\nName to insert: ";
+                    std::getline(std::cin, in);
+                    std::getline(std::cin, in);
+                    list.insert(in);
+                    break;
+            case 7: std::cout << "\nName to remove: ";
+                    std::getline(std::cin, in);
+                    std::getline(std::cin, in);
+                    list.remove(in);
+                    break;
+            default: 
+                std::cout << "Invalid Number";
+                break;
+        }
+    }
 
    return 0;
 }

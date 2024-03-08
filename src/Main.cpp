@@ -144,7 +144,7 @@ public:
                 if(curr == indexptr && curr->next != NULL && curr->next->name.at(0) == first){//this handles if your deleting an 'index name' appropriately setting the next node to the index if it fits the criteria
                     indexArray[first - 'a'] = curr->next;
                 }
-                else{
+                else if(curr == indexptr){
                     indexArray[first - 'a'] = NULL;
                 }
                 if(curr == prev){//this covers an error where if you're removing an 'index name' where prev and curr can be equal 

@@ -15,7 +15,6 @@ public:
         name = y;
         next = NULL;
     }
-
 };
 
 class ScaryLinkedList{
@@ -140,7 +139,7 @@ public:
         }
         std::shared_ptr<Node> prev = curr;
         while(curr != NULL){
-            if(curr->name == name){
+            if(curr->name == lowered){
                 if(curr == indexptr && curr->next != NULL && curr->next->name.at(0) == first){//this handles if your deleting an 'index name' appropriately setting the next node to the index if it fits the criteria
                     indexArray[first - 'a'] = curr->next;
                 }
